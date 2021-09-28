@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 
-import {Actions} from 'react-native-router-flux';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 
 import Form from '../Form';
+import Signup from './SignUp';
+
+const Stack = createNativeStackNavigator();
+
+function NavRules({navigation}) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator >
+          <Stack.Screen name="signup"  component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 
 export default class Login extends Component {
-
-    signup() {
-        Actions.signup()
-    }
-
-    render() {
+ render() {
+    const {navigation} = this.props
         return(
                 <View style={styles.container}>
                 <Text>{'\n'}</Text>
@@ -19,7 +30,7 @@ export default class Login extends Component {
                 <Form type="Login"/>
                 <View style={styles.signupTextCont}> 
                     <Text style={styles.signupText}>Dont have an account yet? </Text>
-                    <TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}>Signup</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('signup')}><Text style={styles.signupButton}>Signup</Text></TouchableOpacity>
                 </View>
             </View>
         )

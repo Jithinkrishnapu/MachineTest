@@ -7,18 +7,22 @@ import {
   StatusBar
 } from 'react-native';
 
-import Form from './Src/Components/Form';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Routes from './Src/Route';
 
 export default class App extends Component   {
   render() {
     return (
-      <View style={styles.container}>
+      <NavigationContainer>
+        <View style={styles.container}>
         <StatusBar
           backgroundColor="#002f6c" 
           barStyle="light-content"
         />
-        <Form type='Login'/>
+        <Routes/>
       </View>
+      </NavigationContainer>
     );
   }
 }
@@ -26,7 +30,5 @@ export default class App extends Component   {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-      alignItems: 'center',
   }
 });
