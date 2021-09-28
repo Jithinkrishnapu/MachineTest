@@ -17,7 +17,7 @@ export default class App extends Component   {
           backgroundColor="#002f6c" 
           barStyle="light-content"
         />
-        <Form/>
+        <Form type='Login'/>
       </View>
     );
   }
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-        alignItems: 'center',
+      alignItems: 'center',
   }
 });
