@@ -8,6 +8,7 @@ const Stack = createNativeStackNavigator();
 
 import Login from './Components/Pages/Login';
 import Signup from './Components/Pages/SignUp';
+import HomeScreen from './Screens/HomeScreen';
 
 export default class Routes extends Component {
     render() {
@@ -28,6 +29,11 @@ export default class Routes extends Component {
                     component={Signup}
                     options={{title:"Sign Up"}}
                     />
+                    <Stack.Screen
+                name="home"
+                component={HomeScreen}
+                options={{title: 'Home'}}
+              />
                 </Stack.Navigator>
             
         )

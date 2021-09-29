@@ -3,71 +3,29 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard } from 'r
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+ 
 
+
+const userInfo = {username :'admin',password :'123456'}
 
 export default class Form extends Component {
 
     constructor(props){
         super(props);
         this.state={
-            email:'',
+            username:'',
             password: ''
         }
     }
 
-    saveData =async()=>{
-        const {email,password} = this.state;
-
-        //save data with asyncstorage
-        let loginDetails={
-            email: email,
-            password: password
-        }
-
-        if(this.props.type !== 'Login')
-        {
-            AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
-
-            Keyboard.dismiss();
-            alert("You successfully registered. Email: " + email + ' password: ' + password);
-            this.login();
-        }
-        else if(this.props.type == 'Login')
-        {
-            try{
-                let loginDetails = await AsyncStorage.getItem('loginDetails');
-                let ld = JSON.parse(loginDetails);
-
-                if (ld.email != null && ld.password != null)
-                {
-                    if (ld.email == email && ld.password == password)
-                    {
-                        alert('Go in!');
-                    }
-                    else
-                    {
-                        alert('Email and Password does not exist!');
-                    }
-                }
-
-            }catch(error)
-            {
-                alert(error);
-            }
-        }
-    }
-
-    showData = async()=>{
-        let loginDetails = await AsyncStorage.getItem('loginDetails');
-        let ld = JSON.parse(loginDetails);
-        alert('email: '+ ld.email + ' ' + 'password: ' + ld.password);
-    }
+   
 
     render() {
         return(
             <View style={styles.container}>
                 <TextInput style={styles.inputBox}
-                onChangeText={(email) => this.setState({email})}
+                onChangeText={(username) => this.setState({username})}
+                value={this.state.username}
                 underlineColorAndroid='rgba(0,0,0,0)' 
                 placeholder="Email"
                 placeholderTextColor = "#002f6c"
@@ -77,6 +35,7 @@ export default class Form extends Component {
                 
                 <TextInput style={styles.inputBox}
                 onChangeText={(password) => this.setState({password})} 
+                value={this.state.password}
                 underlineColorAndroid='rgba(0,0,0,0)' 
                 placeholder="Password"
                 secureTextEntry={true}
@@ -85,11 +44,14 @@ export default class Form extends Component {
                 />
 
                 <TouchableOpacity style={styles.button}> 
-                    <Text style={styles.buttonText} onPress={this.saveData}>{this.props.type}</Text>
+                    <Text style={styles.buttonText} onPress={this._login}>Login</Text>
                 </TouchableOpacity>
             </View>
             
         )
+    }
+    _login =async()=>{
+     
     }
 }
 
