@@ -75,8 +75,9 @@ export default class Login extends Component {
         )
     }
     _login =async()=>{
-      if(userInfo.username===this.state.username&& userInfo.password === this.state.password){
-        AsyncStorage.setItem('isLoggedIn','1');
+      let loginDetails = await AsyncStorage.getItem('loginDetails');
+        let ld = JSON.parse(loginDetails);
+      if(ld.email === this.state.username&& ld.password === this.state.password){
         this.props.navigation.navigate('home');
       }else{
         alert('you have tried a wrong one');

@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Keyboard
 } from 'react-native';
 
 
@@ -12,11 +13,11 @@ import {
 
 
 import Login from './Login';
-import Form from '../Form';
+
 
 import { NavigationContainer } from '@react-navigation/native';
-import {Actions} from 'react-native-router-flux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,28 +32,40 @@ function NavRules({navigation}) {
   }
 
 export default class Signup extends Component {
+
   constructor(props){
     super(props);
     this.state={
-        username:'',
+        email:'',
         password: ''
     }
 }
 
+saveData =async()=>{
+    const {email,password} = this.state;
+    //save data with asyncstorage
+    let loginDetails={
+        email: email,
+        password: password
+    }
+        AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+        Keyboard.dismiss();
+        alert("You successfully registered . Go to signin page and login with details Username: " + email + ' password: ' + password); 
+}
 
- render() {
-    const {navigation} = this.props
+
+
+
+    render() {
+        const {navigation} = this.props
         return(
-                <View style={styles.container}>
+            <View style={styles.container}>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
-
-                <View>
                 <TextInput style={styles.inputBox}
-                onChangeText={(username) => this.setState({username})}
-                value={this.state.username}
+                onChangeText={(email) => this.setState({email})}
                 underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="UserName"
+                placeholder="Username"
                 placeholderTextColor = "#002f6c"
                 selectionColor="#fff"
                 keyboardType="email-address"
@@ -60,21 +73,19 @@ export default class Signup extends Component {
                 
                 <TextInput style={styles.inputBox}
                 onChangeText={(password) => this.setState({password})} 
-                value={this.state.password}
                 underlineColorAndroid='rgba(0,0,0,0)' 
                 placeholder="Password"
                 secureTextEntry={true}
                 placeholderTextColor = "#002f6c"
                 ref={(input) => this.password = input}
                 />
-                <TouchableOpacity style={styles.button}> 
-                    <Text style={styles.buttonText} onPress={this._login}>SignUp</Text>
-                </TouchableOpacity>
-                </View>
 
+                <TouchableOpacity style={styles.button}> 
+                    <Text style={styles.buttonText} onPress={this.saveData}>SignUp</Text>
+                </TouchableOpacity>
                 <View style={styles.signupTextCont}> 
-                    <Text style={styles.signupText}>I already have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}><Text style={styles.signupButton}>LogIn</Text></TouchableOpacity>
+                    <Text style={styles.signupText}>Already have an account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('login')}><Text style={styles.signupButton}>Sign in</Text></TouchableOpacity>
                 </View>
             </View>
         )
@@ -86,25 +97,24 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: 'white'
     },
     signupTextCont: {
       flexGrow: 1,
       justifyContent: 'center',
       alignItems: 'flex-end',
       paddingVertical: 16,
-      flexDirection: 'row',
+      flexDirection: 'row'
     },
     signupText: {
       color: '#12799f', 
-      fontSize:16,
+      fontSize:16
     },
     signupButton: {
         color: '#12799f',
         fontSize:16,
-        fontWeight: '500',
-    }
-    ,
+        fontWeight: '500'
+    },
     inputBox: {
         width: 300,
         backgroundColor: '#eeeeee', 
@@ -113,5 +123,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#002f6c',
         marginVertical: 10
-    } 
+    },
+    button: {
+        width: 300,
+        backgroundColor: '#4f83cc',
+        borderRadius: 25,
+        marginVertical: 10,
+        paddingVertical: 12
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#ffffff',
+        textAlign: 'center'
+    }
 });

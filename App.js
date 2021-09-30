@@ -8,13 +8,9 @@ import {
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 import Routes from './Src/Route';
-import HomeScreen from './Src/Screens/HomeScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const Stack = createNativeStackNavigator();
 
 
 
