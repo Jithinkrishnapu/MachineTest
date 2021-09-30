@@ -3,10 +3,23 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard } from 'r
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
- 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const userInfo = {username :'admin',password :'123456'}
+
+
+const Stack = createNativeStackNavigator();
+
+function NavRules({navigation}) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator >
+          <Stack.Screen name="signup"  component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 
 export default class Form extends Component {
 

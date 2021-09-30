@@ -32,7 +32,7 @@ export default class Routes extends Component {
                     <Stack.Screen
                 name="home"
                 component={HomeScreen}
-                options={{title: 'Home'}}
+                options={{title: 'Welcome',headerBackVisible:false,}}
               />
                 </Stack.Navigator>
             

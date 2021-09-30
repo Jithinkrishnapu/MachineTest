@@ -113,18 +113,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#002f6c',
         marginVertical: 10
-    },
-    button: {
-        width: 300,
-        backgroundColor: '#4f83cc',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ffffff',
-        textAlign: 'center'
-    }
+    } 
 });

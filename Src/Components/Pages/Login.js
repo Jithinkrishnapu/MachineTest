@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Form from '../Form';
 import Signup from './SignUp';
+import HomeScreen from '../../Screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
