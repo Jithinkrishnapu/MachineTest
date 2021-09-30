@@ -6,9 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 
-import Form from '../Form';
+
 import Signup from './SignUp';
-import HomeScreen from '../../Screens/HomeScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +22,7 @@ function NavRules({navigation}) {
     );
   }
 
-const userInfo = {username:'admin',password: '123456'}
+// const userInfo = {username:'admin',password: '123456'}
 
 export default class Login extends Component {
 
